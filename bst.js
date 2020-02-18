@@ -19,6 +19,46 @@ function add(root, node) {
   return root;
 }
 
+function deleteFromBst(root, dataToDelete) {
+  if(root == null) {
+    return root;
+  }
+  if(dataToDelete < root.data) {
+    deleteFromBst(root.left, dataToDelete);
+  } else if(dataToDelete > root.data) {
+    deleteFromBst(root.right, dataToDelete);
+  } else {
+    if(root.left == null) {
+      makeRightSubtreeTheRoot(theRoot, nodeToReplace);
+    } else if(root.right == null) {
+      makeLeftSubtreeTheRoot(theRoot, nodeToReplace);
+    } else {
+      const largestNode = getLargestOfLeftSubtree(root.left);
+      root.data = largestNode.data;
+      console.log('theRoot: ' + JSON.stringify(theRoot));
+      deleteFromBst(root.left, root.data);
+    }
+  }
+  return root;
+}
+
+// function makeLeftSubtreeTheRoot(root, nodeToReplace) {
+//   if(root.left.data == nodeToReplace.data) {
+//     root.left = nodeToReplace.left;
+//   } else if(root.right.data == nodeToReplace.data) {
+//     root.right = nodeToReplace.left;
+//   } else {
+//     makeLeftSubtreeTheRoot()
+//   }
+// }
+
+function getLargestOfLeftSubtree(root) {
+  if(root.right == null) {
+    return root;
+  }
+  getLargestOfLeftSubtree(root.right);
+}
+
 
 function bfs() {
   let result = [];
@@ -46,7 +86,13 @@ function preOrder(node, result) {
 }
 
 constructBst();
+console.log('Bst: ' + JSON.stringify(theRoot));
+
 bfs();
+
+theRoot = deleteFromBst(theRoot, 8);
+console.log('Delete from Bst: ' + JSON.stringify(theRoot));
+
 const preOrdered = preOrder(theRoot, []);
 console.log('preOrdered: ' + preOrdered);
 
