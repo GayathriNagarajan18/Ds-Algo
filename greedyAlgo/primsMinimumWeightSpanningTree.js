@@ -12,6 +12,7 @@ let visited = ["A"];
 addUnvisitedEdgesToMinHeap("A");
 constructMinimumSpanningTree();
 console.log('mst: ' + JSON.stringify(mst));
+console.log('min weight: ' + mst.reduce((sum, edge) => sum + edge.priority, 0));
 
 function addUnvisitedEdgesToMinHeap(vertex) {
   getEdgesOfTheGivenVertex(vertex).forEach((edge) => priorityQueue.add(edge, graph[edge]));

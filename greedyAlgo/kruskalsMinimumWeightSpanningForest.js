@@ -1,3 +1,4 @@
+//O(ElogV). Uses union find data structure
 let edges = {
   "AB": 0, "AD": 6, "BC": 9, "BD": 7, "BG": 5, "CG": -2, "CE": 4, "CF": 3, 
   "ED": 1, "EG": 3, "EF": 6, "DG": 2
@@ -12,7 +13,7 @@ function constructGraph(edges) {
     let edge = {};
     edge['vertex1'] = key[0];
     edge['vertex2'] = key[1];
-    //Add ids
+    //Added ids so as to use the union find datastructure in array
     edge['vertexId1'] = vertexLookUp[key[0]];
     edge['vertexId2'] = vertexLookUp[key[1]]; 
     edge['weight'] = edges[key];
@@ -55,12 +56,12 @@ function union(v1, v2) {
   const rankOfV2 = ranks[rootOfV2];
 
   if(rankOfV1 < rankOfV2) {
-    roots[v1] = v2;
+    roots[rootOfV1] = rootOfV2;
   } else if(rankOfV2 < rankOfV1) {
-    roots[v2] = v1;
+    roots[rootOfV2] = rootOfV1;
   } else {
-    roots[v2] = v1;
-    ++ranks[v1];
+    roots[rootOfV2] = rootOfV1;
+    ++ranks[rootOfV1];
   }
 }
 
@@ -78,7 +79,7 @@ constructGraph(edges);
 console.log('graph: ' + JSON.stringify(graph));
 
 makeSet(7);
-console.log('makeSet: ' + roots + ', ' + ranks);
+console.log('makeSet -> ' + 'Roots: ' + roots + ' Ranks: ' + ranks);
 
 findMinWeightViaKruskalsAlgo();
 console.log('mst: ' + JSON.stringify(mst));
