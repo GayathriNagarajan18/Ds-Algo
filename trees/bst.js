@@ -1,20 +1,23 @@
 let input = [8,7,3,4,9,5,6];
 var theRoot = null;
 
-function constructBst() {
-  let nodes = input.map((item) => ({left: null, right: null, data: item}));
+function constructBst(input) {
+  let nodes = input.map((item) => ({left: null, right: null, data: item, parent: null}));
   nodes.forEach((node) => {
     theRoot = add(theRoot, node);
   });
+  return theRoot;
 }
 
 function add(root, node) {
-  if(null == root) {
+  if(null == root || root.data == null) {
     return node;
   } else if(node.data < root.data) {
     root.left = add(root.left, node);
+    root.left.parent = root;
   } else {
     root.right = add(root.right, node);
+    root.right.parent = root;
   }
   return root;
 }
@@ -85,17 +88,23 @@ function preOrder(node, result) {
   return result;
 }
 
-constructBst();
-console.log('Bst: ' + JSON.stringify(theRoot));
+function execute() {
+  constructBst(input);
+  //console.log('Bst: ' + JSON.stringify(theRoot));
+  
+  bfs();
+  
+  //theRoot = deleteFromBst(theRoot, 8);
+  //console.log('Delete from Bst: ' + JSON.stringify(theRoot));
+  
+  const preOrdered = preOrder(theRoot, []);
+  console.log('preOrdered: ' + preOrdered);
+}
 
-bfs();
+//execute();
 
-theRoot = deleteFromBst(theRoot, 8);
-console.log('Delete from Bst: ' + JSON.stringify(theRoot));
-
-const preOrdered = preOrder(theRoot, []);
-console.log('preOrdered: ' + preOrdered);
-
-
-
+module.exports = {
+  constructBst: constructBst,
+  add: add
+}
 

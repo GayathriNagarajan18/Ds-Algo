@@ -1,5 +1,5 @@
 //Greedy Algorithm / Graph search algorithm / O(E + VlogV) 
-const priorityQueue = require('../priorityQueue.js');
+const priorityQueue = require('../trees/priorityQueue.js');
 let minHeap = priorityQueue.queue;
 
 let graph = {

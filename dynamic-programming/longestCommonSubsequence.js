@@ -1,7 +1,7 @@
 const cache = {};
 function lcs(word1, word2, index1, index2) {
   let result;
-  const key = ""+index1+index2;
+  const key = ""+index1+"-"+index2;
   if(cache[key]) {
     return cache[key];
   } else if(index1 === 0 || index2 === 0) {

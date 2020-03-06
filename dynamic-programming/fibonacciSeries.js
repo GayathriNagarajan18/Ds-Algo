@@ -13,10 +13,8 @@ function memoizedFib(n) {
   if(cache[n]) {
     return cache[n];
   } 
-  cache[n-1] = memoizedFib(n-1) 
+  cache[n-1] = memoizedFib(n-1); 
   cache[n-2] = memoizedFib(n-2);
   return cache[n-1] + cache[n-2];
 }
 console.log(memoizedFib(100));
-
-//Using bottom-up approach

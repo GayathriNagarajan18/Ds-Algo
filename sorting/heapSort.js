@@ -1,4 +1,4 @@
-const priorityQueue = require('../priorityQueue.js');
+const priorityQueue = require('../trees/priorityQueue.js');
 const arr = [8,6,7,4,5,3,2,1];
 const sortedArr = [];
 
