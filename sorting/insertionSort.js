@@ -1,5 +1,4 @@
-//O(n^2). Used in TimSort. Insert element one by one from right to the correct position in "front sorted list". 
-//After insertion, restore the sort invariant before grabbing the next right element.
+//O(n^2). Used in TimSort. Insert the element one by one from right to the correct position in "front sorted list / left". 
 const swap = require('../swap.js');
 const arr = [8,6,7,4,5,3,2,1];
 
